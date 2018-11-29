@@ -11,7 +11,7 @@ $(document).ready(function() {
     $("body").on("click", ".header_social-block_arrow-down", function() { 
     	$(".overlay").show();
     	$(".header_social-block_hidden").show();
-    	$(".header_social-block_arrow-down img").attr('src', 'img/social-down-open.png');
+    	$(".header_social-block_arrow-down img").attr('src', '/img/social-down-open.png');
     });
 
     //hide header socials
@@ -21,7 +21,7 @@ $(document).ready(function() {
 			if (!arrowBlock.is(e.target) ) { 
 				$(".overlay").hide();
     			$(".header_social-block_hidden").hide();
-    			$(".header_social-block_arrow-down img").attr('src', 'img/social-down.png');
+    			$(".header_social-block_arrow-down img").attr('src', '/img/social-down.png');
 			}
 		});
 	});
@@ -196,14 +196,14 @@ $(document).ready(function() {
         }
     });
 
-    $("body").on("click", ".filter-block_select_result-item label", function() { 
+    $("body").on("click", ".filter-block_select_result-item label", function() {
         if($(this).siblings("input").prop("checked")){
             $(this).parent(".filter-block_select_result-item").removeClass("checked");
             $(".filte_tags-from-select span:contains("+ $(this).text() +")").remove();
         }
         else{
             $(this).parent(".filter-block_select_result-item").addClass("checked");
-            $("<span><img src='img/cl-tags.png' alt='X'>" + $(this).text() + "</span>").appendTo(".filte_tags-from-select");
+            $("<span><img src='/img/cl-tags.png' alt='X'>" + $(this).text() + "</span>").appendTo(".filte_tags-from-select");
         }
         var checkedCount = $(".filter-block_select_result-item.checked").length;
         if(checkedCount > 0){
@@ -216,7 +216,7 @@ $(document).ready(function() {
         }
     });
 
-    $("body").on("click", ".filte_tags-from-select span img", function() { 
+    $("body").on("click", ".filte_tags-from-select span img", function() {;
         $(".filter-block_select_result-item.checked label:contains("+ $(this).parent(".filte_tags-from-select span").text() +")").parent(".filter-block_select_result-item").removeClass("checked").children('input').prop('checked', false);
         $(this).parent(".filte_tags-from-select span").remove();
         var checkedCount = $(".filter-block_select_result-item.checked").length;
@@ -228,6 +228,7 @@ $(document).ready(function() {
             $(".filter-block_select-wrap span").text("Выберите аранжировку");
             $(".filter-block_select-wrap").css("background", "#FFF");
         }
+        pjaxReload()
     });
 
     //year select
@@ -431,41 +432,6 @@ $(document).ready(function() {
         return false;
     });
     // order form validation
-    $("body").on("keyup change blur click", "input[name='just-text'], input[name='phone-text'], input[name='email'], input[name='send-check']", function() {
-        phoneVal = $("input[name='phone-text']").val();
-        var phoneMask = /^(\s*)?(\+)?([- ():=+]?\d[- ():=+]?){10,14}(\s*)?$/;
-        switch($(this).prop("name")){
-            case "just-text":
-                if($(this).val().length < 1 ){
-                    $(this).addClass("error");
-                    $(this).siblings(".order_error-message").show();
-                }
-                else{
-                    $(this).removeClass("error");
-                    $(this).siblings(".order_error-message").hide();
-                }
-            break;
-            case "phone-text":
-                if(!phoneMask.test(phoneVal)){
-                    $(this).addClass("error"); 
-                    $(this).siblings(".order_error-message").show();
-                }
-                else{
-                    $(this).removeClass("error");
-                    $(this).siblings(".order_error-message").hide();
-                }
-            break;
-            case "email":
-                var emailItem = $(this);
-                checkEmail(emailItem);
-            break;
-            default:
-            break;
-        }
-
-        checkForm($(this.form));
-        
-    });
     
 
     //audio player
@@ -540,13 +506,13 @@ $(document).ready(function() {
             }
 
             // temp
-            var url = location.origin + location.pathname.split("/").slice(0, -1).join('/') + '/ajax/basket.json';   
+            var url = '/cart/add';
 
 
             $.ajax({
                 method: "POST",
                 url: url,
-                data: { id: "123", quantity: "1" },
+                data: $('#addCartItem').serialize(),
                 dataType:'json',
                 success: function(answer){
                     if(answer.TYPE == 'OK'){
@@ -558,6 +524,15 @@ $(document).ready(function() {
                             if (basketValue.text() > 0){
                                 $(".header_middle-info_basket-img").addClass("active");
                         }
+                        $.ajax({
+                            url: "/cart/count",
+                            data: $('#addCartItem').serialize(),
+                            method: 'post',
+                            dataType:'json',
+                            success: function (result) {
+                                $('#cartCount').html(result.cartCount);
+                            }
+                        });
                     }
                     if (answer.MESSAGE){
                         showmessage(answer.MESSAGE);
@@ -603,22 +578,6 @@ function showmessage(msg){
     var modal = $('#modal-note');
     modal.find('.model_conent-message').html(msg);
     modal.show();
-}
-
-function checkForm(form){
-
-    if( !(form.find("input[name='just-text'], input[name='phone-text'], input[name='email'], input[name='send-check']").hasClass('error')) && form.find("input[name='just-text'], input[name='phone-text'], input[name='email'], input[name='send-check']").val().length > 0 && $("input[name='send-check']").prop("checked") ){
-        form.find("button[name='send-btn']").addClass("active");
-        form.find("button[name='send-btn']").prop("disabled", false);
-        return true;
-    }
-    else{
-        form.find("button[name='send-btn']").removeClass("active");
-        form.find("button[name='send-btn']").prop("disabled", true);
-    }
-
-    return false;
-
 }
 
 function sliderInit() {

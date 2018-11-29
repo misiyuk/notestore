@@ -14,6 +14,10 @@ return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@filesRoot'   => $params['filesPath'],
+        '@files'   => $params['filesHostInfo'],
+        '@staticRoot' => $params['staticPath'],
+        '@static'   => $params['staticHostInfo'],
     ],
     'controllerMap' => [
         'fixture' => [

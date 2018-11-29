@@ -1,7 +1,9 @@
 <?php
 use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
-
+/**
+ * @var yii\web\View $this
+ */
 ?>
 <div class="content-wrapper">
     <section class="content-header">

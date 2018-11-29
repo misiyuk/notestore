@@ -4,7 +4,7 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use common\forms\LoginForm;
+use backend\forms\LoginForm;
 
 /**
  * Site controller

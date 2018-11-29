@@ -36,3 +36,5 @@ phpunit.phar
 
 # local docker data
 /storage
+
+/draft

@@ -5201,3 +5201,6 @@ a.note_pagination-prev {
 	}
 
 }
+a.filter_choose-sort_item:not(.active):hover {
+	cursor: pointer;
+}

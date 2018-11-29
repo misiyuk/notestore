@@ -31,33 +31,23 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'Аранжировки', 'icon' => 'file-code-o', 'url' => ['arrangement/list']],
+                    ['label' => 'Нотные наборы', 'icon' => 'file-code-o', 'url' => ['note-pack/list']],
+                    ['label' => 'Заказы', 'icon' => 'file-code-o', 'url' => ['order/list']],
+                    ['label' => 'Исполнители', 'icon' => 'file-code-o', 'url' => ['artist/list']],
+                    ['label' => 'Композиции', 'icon' => 'file-code-o', 'url' => ['song/list']],
+                    ['label' => 'Купленые ноты', 'icon' => 'file-code-o', 'url' => ['sale-offer-order/list']],
                     [
-                        'label' => 'Some tools',
-                        'icon' => 'share',
-                        'url' => '#',
+                        'label' => 'Списки',
+                        'icon' => 'file-code-o',
                         'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
+
+                            ['label' => 'Жанры', 'icon' => 'file-code-o', 'url' => ['genre/list']],
+                            ['label' => 'Форматы', 'icon' => 'file-code-o', 'url' => ['formats/list']],
+                            ['label' => 'Типы предложений', 'icon' => 'file-code-o', 'url' => ['offer-type/list']],
+                            ['label' => 'Типы аранжировок', 'icon' => 'file-code-o', 'url' => ['arrangement-type/list']],
+                            ['label' => 'Сущности предложений', 'icon' => 'file-code-o', 'url' => ['offer-entity/list']],
+                            ['label' => 'Фильмы', 'icon' => 'file-code-o', 'url' => ['film/list']],
                         ],
                     ],
                 ],
